@@ -1,6 +1,6 @@
 data "archive_file" "ai_lambda" {
   type        = "zip"
-  source_file = "${path.module}/../src/ai/invoke_model.py"
+  source_dir  = "${path.module}/../src/ai"
   output_path = "${path.module}/../src/ai/invoke_model.zip"
 }
 
@@ -20,7 +20,8 @@ resource "aws_lambda_function" "ai" {
 
   environment {
     variables = {
-      BEDROCK_MODEL_ID = var.bedrock_model_id
+      BEDROCK_MODEL_ID  = var.bedrock_model_id
+      KNOWLEDGE_BASE_ID = aws_bedrockagent_knowledge_base.customer_support.id
     }
   }
 }

@@ -42,3 +42,23 @@ resource "aws_iam_role_policy" "bedrock_invoke" {
     ]
   })
 }
+resource "aws_iam_role_policy" "lambda_knowledge_base" {
+  name = "${var.project_name}-${var.environment}-lambda-kb"
+  role = aws_iam_role.ai_lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+
+    Statement = [
+      {
+        Effect = "Allow"
+
+        Action = [
+          "bedrock:Retrieve"
+        ]
+
+        Resource = aws_bedrockagent_knowledge_base.customer_support.arn
+      }
+    ]
+  })
+}
