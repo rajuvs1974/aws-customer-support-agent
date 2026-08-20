@@ -1,3 +1,4 @@
+
 resource "aws_s3_bucket" "knowledge_documents" {
   bucket = "${var.project_name}-${var.environment}-knowledge"
 
