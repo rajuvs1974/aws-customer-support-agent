@@ -15,3 +15,8 @@ variable "project_name" {
   type        = string
   default     = "customer-support-agent"
 }
+variable "bedrock_model_id" {
+  description = "Amazon Bedrock foundation model ID"
+  type        = string
+  default     = "amazon.nova-lite-v1:0"
+}
