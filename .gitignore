@@ -6,6 +6,7 @@ crash.log
 crash.*.log
 *.tfplan
 
+
 # Terraform variables
 *.tfvars
 *.tfvars.json
@@ -38,3 +39,4 @@ temp/
 
 # AWS
 .aws/
+*.zip
