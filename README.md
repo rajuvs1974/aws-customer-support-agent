@@ -1,44 +1,75 @@
-# AWS Enterprise Customer Support Agent
+## 🏗️ Architecture
 
-Production-style Agentic AI customer support platform built on AWS.
+Project 1 uses a **two-layer AWS architecture** designed to separate persistent knowledge/data infrastructure from deployable application infrastructure.
 
-## Architecture
+This separation allows the AI application to be destroyed and recreated without losing the RAG knowledge base, vector index, policy documents, or business data.
 
-Coming soon.
+### System Architecture
 
-## Business Problem
+![Customer Support AI Agent Architecture](architecture-diagram.png)
 
-Coming soon.
+### Architecture Layers
 
-## Key Capabilities
+| Layer | Purpose | Terraform State | Lifecycle |
+|---|---|---|---|
+| **Foundation / Persistent** | S3 documents, S3 Vectors, Bedrock Knowledge Base, DynamoDB and Bedrock IAM | `terraform/foundation` | Persistent |
+| **Application / Deployable** | Lambda AI Agent, API Gateway and Lambda IAM | `terraform/application` | Destroy / Recreate |
 
-- Agentic AI
-- RAG
-- Tool Calling
-- MCP
-- Enterprise Knowledge Retrieval
-- Human-in-the-loop
-- Guardrails
-- Evaluation
-- Observability
-- Infrastructure as Code
+### Foundation Layer — Persistent
 
-## AWS Services
+The Foundation layer contains resources that should survive application deployments and application teardown:
 
-- Amazon Bedrock
-- Bedrock Knowledge Bases
-- AgentCore
-- S3
-- Lambda
-- DynamoDB
-- API Gateway
-- IAM
-- CloudWatch
+- **Amazon S3** — stores customer-support policy documents
+- **Amazon S3 Vectors** — stores vector embeddings
+- **Amazon Bedrock Knowledge Base** — RAG retrieval layer
+- **Bedrock Data Source** — connects the Knowledge Base to S3
+- **Amazon DynamoDB**
+  - Customers
+  - Orders
+  - Shipments
+- **IAM** — permissions required by the Bedrock Knowledge Base
 
-## Infrastructure
+The Foundation state is intentionally isolated from the application state.
 
-Terraform
+### Application Layer — Deployable
 
-## Project Status
+The Application layer contains resources that can safely be destroyed and recreated:
 
-🚧 Milestone 1 — AWS Foundation
+- **Amazon API Gateway HTTP API**
+- **AWS Lambda AI Agent**
+- **Lambda execution IAM role**
+- **Bedrock model invocation permissions**
+- **Knowledge Base retrieval permissions**
+- **DynamoDB shipment lookup permissions**
+- API Gateway → Lambda integration
+- `POST /chat` route
+- Lambda invocation permission
+
+### Request Flow
+
+```text
+Customer
+   │
+   ▼
+API Gateway
+   │
+   ▼
+Lambda AI Agent
+   │
+   ├─────────────── Policy / General Question ───────────────┐
+   │                                                         ▼
+   │                                             Amazon Bedrock
+   │                                                         │
+   │                                                         ▼
+   │                                             Knowledge Base
+   │                                                 /         \
+   │                                                /           \
+   │                                               ▼             ▼
+   │                                             S3          S3 Vectors
+   │                                          Documents      Vector Index
+   │
+   └────────────── Shipment Question ────────────────────────►
+                                                               │
+                                                               ▼
+                                                           DynamoDB
+                                                           Shipments
