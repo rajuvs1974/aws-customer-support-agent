@@ -1,0 +1,236 @@
+{
+  "timestamp": "2026-08-21T01:10:33.525303Z",
+  "total_tests": 15,
+  "passed": 15,
+  "failed": 0,
+  "pass_rate": 100.0,
+  "results": [
+    {
+      "id": "T01",
+      "category": "shipping",
+      "question": "What happens if my shipment is delayed more than 5 business days?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Escalate to the logistics support team",
+      "answer": "If your shipment is delayed more than 5 business days, it should be escalated to the logistics support team. According to the company policy, shipments delayed by more than 5 business days should be reviewed by the logistics support team before a refund is approved. \n\nIn your case, the shipment with ID SHIP-1003 is currently delayed and has been delayed for more than 5 business days. The logistics support team will review the situation and provide further assistance.\n\nPlease note that I cannot provide a specific refund amount or delivery date until the order and applicable policy have been verified. If you have any further questions or need additional assistance, feel free to ask.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/shipping_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T02",
+      "category": "shipping",
+      "question": "What should customer support do when a shipment is delayed?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Verify order, shipment status, promised delivery date and provide the latest available delivery information",
+      "answer": "Based on the live shipment information, the shipment with ID SHIP-1003 is currently delayed. Here's what customer support should do:\n\n1. Verify the order number (ORD-1003).\n2. Verify the shipment status (DELAYED).\n3. Check the promised delivery date (2026-08-14).\n4. Determine the number of business days the shipment is delayed (6 business days).\n5. Provide the customer with the latest available estimated delivery date (2026-08-22).\n6. Explain the reason for the delay: \"The shipment is currently delayed at the regional distribution center.\"\n\nSince the shipment is delayed by more than 5 business days, it should be escalated to the logistics support team. The escalation should include:\n\n- Customer ID: CUST-003\n- Order ID: ORD-1003\n- Shipment ID: SHIP-1003\n- Original promised delivery date: 2026-08-14\n- Current shipment status: DELAYED\n- Number of business days delayed: 6\n- Latest estimated delivery date: 2026-08-22\n\nPlease let me know if you need any further assistance.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/shipping_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T03",
+      "category": "shipping",
+      "question": "Can international shipments have delivery delays?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "International shipments may require additional time because of customs, security inspections or local carrier processing",
+      "answer": "Yes, international shipments may require additional processing time because of customs clearance, security inspections, or local carrier processing. This may result in delivery delays. However, customer support should not promise a specific international delivery date unless a confirmed carrier estimate is available.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/shipping_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md"
+      ],
+      "tool_used": null
+    },
+    {
+      "id": "T04",
+      "category": "refund",
+      "question": "Can I get a refund if my shipment is delayed?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "A delayed shipment does not automatically qualify for a refund; eligibility must be reviewed",
+      "answer": "Based on the live shipment information, your shipment (SHIP-1003) is currently delayed and has been delayed for 8 business days as of today. According to our policy, shipments delayed by more than 5 business days should be reviewed by the logistics support team before a refund is approved.\n\nI recommend escalating this case to our logistics support team for further review. If the delay qualifies under our service commitment, you may be eligible for a refund. Please allow us to investigate this further.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/shipping_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T05",
+      "category": "refund",
+      "question": "Can I get a refund if my shipment is confirmed lost?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "A confirmed lost shipment may qualify for a refund",
+      "answer": "Based on the live shipment information, your shipment with ID SHIP-1003 is currently delayed, not lost. According to the company policy, a shipment should only be classified as lost after sufficient investigation or carrier confirmation. Since your shipment is still classified as delayed, it does not qualify for a refund as a lost shipment at this time.\n\nIf your shipment remains delayed beyond the promised delivery date, you may be eligible for a refund. Please allow us to continue monitoring the shipment status. If the shipment is confirmed as lost by the carrier, you may be eligible for a refund of the applicable order amount.\n\nIf you have any further questions or need assistance, please let us know.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T06",
+      "category": "cancellation",
+      "question": "Can I cancel my order before fulfillment?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Cancellation may be approved before fulfillment",
+      "answer": "Yes, you can cancel your order before fulfillment. According to our policy, customers may request cancellation before an order enters the fulfillment process. If the cancellation is approved before fulfillment, the customer is generally eligible for a refund of the amount charged.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/cancellation_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md"
+      ],
+      "tool_used": null
+    },
+    {
+      "id": "T07",
+      "category": "cancellation",
+      "question": "Can I cancel an order after it has shipped?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Orders already shipped generally cannot be canceled directly",
+      "answer": "Based on the live shipment information, your order with shipment ID SHIP-1003 is currently delayed. According to our company policy, once an order has been shipped, it generally cannot be canceled directly. However, you may be able to refuse delivery if supported by the carrier, or request a return after delivery.\n\nIf you need further assistance, please let us know.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/cancellation_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T08",
+      "category": "lost_shipment",
+      "question": "When should a shipment be considered lost?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Carrier confirmation or sufficient investigation is required; a delayed shipment is not automatically lost",
+      "answer": "A shipment should not be classified as lost solely because it is delayed. A shipment may be considered potentially lost when:\n\n- The carrier has explicitly reported the shipment as lost.\n- Tracking information has not changed for an extended period and the carrier investigation indicates a potential loss.\n- The carrier investigation has confirmed that the package cannot be located.\n\nCustomer support must rely on carrier confirmation before classifying a shipment as officially lost.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md"
+      ],
+      "tool_used": null
+    },
+    {
+      "id": "T09",
+      "category": "lost_shipment",
+      "question": "Can I get a replacement for a confirmed lost shipment?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "A replacement may be available depending on inventory and applicable rules",
+      "answer": "Hi there, I checked the status of your shipment with the tracking number DEMO1003. Currently, the shipment is delayed at the regional distribution center and has not been classified as lost. According to our policy, a replacement can only be offered if the shipment is confirmed as lost by the carrier. If the shipment remains delayed or is eventually confirmed as lost, you may be eligible for a replacement depending on inventory availability and applicable order terms. Please let us know if you have any further questions or need assistance with anything else.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T10",
+      "category": "damaged_package",
+      "question": "What information is required for a damaged package claim?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Order ID, shipment ID, product information, delivery date, damage description and potentially photographs",
+      "answer": "To report a damaged package, you should provide the following information:\n\n- Order ID\n- Shipment ID\n- Product information\n- Delivery date\n- Description of the damage\n- Photographs or other evidence when required\n- Packaging condition when relevant\n\nIf you need further assistance, please let me know.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/damaged_package_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md"
+      ],
+      "tool_used": null
+    },
+    {
+      "id": "T11",
+      "category": "damaged_package",
+      "question": "Can I get a replacement for a damaged product?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "An approved damage claim may qualify for replacement when inventory is available",
+      "answer": "Hi there, I understand you're inquiring about a replacement for a damaged product. To proceed, I need some additional information from you:\n\n1. Order ID\n2. Shipment ID\n3. Product information\n4. Delivery date\n5. Description of the damage\n6. Photographs or other evidence of the damage\n\nOnce I have this information, I can determine if the damage claim is approved and if the product is available for replacement. Thank you for your cooperation.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/damaged_package_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T12",
+      "category": "escalation",
+      "question": "When should a shipment case be escalated?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Examples include delays over 5 business days, confirmed lost shipments and high-value missing shipments",
+      "answer": "A shipment case should be escalated when:\n\n- A shipment is delayed by more than 5 business days.\n- A carrier confirms that a shipment is lost.\n- Tracking information is inconsistent with the order record.\n- A high-value shipment is missing.\n- The customer disputes the carrier's status.\n- A carrier investigation has been unsuccessful.\n\nThe escalation should include the order ID, shipment ID, customer ID, current tracking status, promised delivery date, and relevant case history.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/shipping_policy.md"
+      ],
+      "tool_used": null
+    },
+    {
+      "id": "T13",
+      "category": "tool",
+      "question": "Where is shipment SHIP-1003?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Use the shipment lookup tool and return live shipment information",
+      "answer": "The shipment with ID SHIP-1003 is currently delayed at the regional distribution center. The estimated delivery date is now August 22, 2026. If you need further assistance, please let me know.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/shipping_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/escalation_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T14",
+      "category": "tool_rag",
+      "question": "SHIP-1003 is delayed. What are my options?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Use shipment lookup plus company policies to provide a grounded answer",
+      "answer": "Hi there, I understand that your shipment (SHIP-1003) is currently delayed. According to our records, the shipment was delayed at the regional distribution center. The shipment was promised to be delivered by August 14, 2026, but it is now estimated to be delivered by August 22, 2026.\n\nHere are your options:\n\n1. **Wait for the shipment**: If the delay is not significant and you can wait for the shipment to arrive, you can choose to wait. The latest estimated delivery date is August 22, 2026.\n\n2. **Escalate the issue**: If the delay is significant and you cannot wait for the shipment to arrive, you can escalate the issue to our logistics support team. Please provide the following information when escalating the issue:\n   - Customer ID: CUST-003\n   - Order ID: ORD-1003\n   - Shipment ID: SHIP-1003\n   - Original promised delivery date: August 14, 2026\n   - Current shipment status: DELAYED\n   - Number of business days delayed: 8\n   - Latest estimated delivery date: August 22, 2026\n\n3. **Refund**: If the shipment is significantly delayed and the applicable service commitment was not met, you may be eligible for a refund. However, before approving a refund, we need to verify the order ID, shipment ID, promised delivery date, number of business days delayed, and whether the shipment has been delivered. Shipments delayed by more than 5 business days should be reviewed by the logistics support team before a refund is approved.\n\nPlease let me know if you have any questions or if you would like to proceed with any of the options mentioned above.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/shipping_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md"
+      ],
+      "tool_used": "get_shipment"
+    },
+    {
+      "id": "T15",
+      "category": "out_of_scope",
+      "question": "Can you give me a 20% discount on my next order?",
+      "passed": true,
+      "reason": "Passed basic evaluation",
+      "expected": "Do not invent a discount policy; state that the available policies do not provide enough information",
+      "answer": "I'm sorry, but I cannot offer a discount on your next order as it is not supported by our company policies. If you have any questions about our policies or need assistance with a shipment, I'm here to help.",
+      "sources": [
+        "s3://customer-support-agent-dev-knowledge/policies/cancellation_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/refund_policy.md",
+        "s3://customer-support-agent-dev-knowledge/policies/lost_shipment_policy.md"
+      ],
+      "tool_used": null
+    }
+  ]
+}

@@ -10,6 +10,7 @@ crash.*.log
 # Terraform variables
 *.tfvars
 *.tfvars.json
+terraform-state-backup.json
 
 # Secrets
 .env
@@ -40,3 +41,4 @@ temp/
 # AWS
 .aws/
 *.zip
+.env

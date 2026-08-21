@@ -1,0 +1,55 @@
+[
+  {
+    "shipment_id": "SHIP-1001",
+    "order_id": "ORD-1001",
+    "customer_id": "CUST-001",
+    "status": "IN_TRANSIT",
+    "carrier": "DemoExpress",
+    "tracking_number": "DEMO1001",
+    "ship_date": "2026-08-17",
+    "promised_delivery_date": "2026-08-21",
+    "estimated_delivery_date": "2026-08-21",
+    "last_tracking_event": "Package arrived at regional distribution center",
+    "last_updated": "2026-08-20T14:30:00Z"
+  },
+  {
+    "shipment_id": "SHIP-1002",
+    "order_id": "ORD-1002",
+    "customer_id": "CUST-002",
+    "status": "DELIVERED",
+    "carrier": "DemoExpress",
+    "tracking_number": "DEMO1002",
+    "ship_date": "2026-08-14",
+    "promised_delivery_date": "2026-08-19",
+    "estimated_delivery_date": "2026-08-19",
+    "delivery_date": "2026-08-19",
+    "last_tracking_event": "Delivered to customer",
+    "last_updated": "2026-08-19T16:45:00Z"
+  },
+  {
+    "shipment_id": "SHIP-1003",
+    "order_id": "ORD-1003",
+    "customer_id": "CUST-003",
+    "status": "DELAYED",
+    "carrier": "DemoExpress",
+    "tracking_number": "DEMO1003",
+    "ship_date": "2026-08-10",
+    "promised_delivery_date": "2026-08-14",
+    "estimated_delivery_date": "2026-08-22",
+    "last_tracking_event": "Shipment delayed at regional distribution center",
+    "last_updated": "2026-08-20T12:15:00Z"
+  },
+  {
+    "shipment_id": "SHIP-1004",
+    "order_id": "ORD-1004",
+    "customer_id": "CUST-004",
+    "status": "LOST",
+    "carrier": "DemoExpress",
+    "tracking_number": "DEMO1004",
+    "ship_date": "2026-08-08",
+    "promised_delivery_date": "2026-08-13",
+    "estimated_delivery_date": null,
+    "last_tracking_event": "Carrier confirmed shipment lost",
+    "last_updated": "2026-08-20T10:00:00Z"
+  }
+]
