@@ -11,6 +11,15 @@ crash.*.log
 *.tfvars
 *.tfvars.json
 terraform-state-backup.json
+.terraform/
+
+*.tfstate
+*.tfstate.*
+*.tfplan
+
+terraform-state-*.json
+
+*.zip
 
 # Secrets
 .env
