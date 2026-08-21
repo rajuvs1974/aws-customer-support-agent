@@ -1,0 +1,92 @@
+[
+  {
+    "id": "T01",
+    "question": "What happens if my shipment is delayed more than 5 business days?",
+    "expected": "Escalate to the logistics support team",
+    "category": "shipping"
+  },
+  {
+    "id": "T02",
+    "question": "What should customer support do when a shipment is delayed?",
+    "expected": "Verify order, shipment status, promised delivery date and provide the latest available delivery information",
+    "category": "shipping"
+  },
+  {
+    "id": "T03",
+    "question": "Can international shipments have delivery delays?",
+    "expected": "International shipments may require additional time because of customs, security inspections or local carrier processing",
+    "category": "shipping"
+  },
+  {
+    "id": "T04",
+    "question": "Can I get a refund if my shipment is delayed?",
+    "expected": "A delayed shipment does not automatically qualify for a refund; eligibility must be reviewed",
+    "category": "refund"
+  },
+  {
+    "id": "T05",
+    "question": "Can I get a refund if my shipment is confirmed lost?",
+    "expected": "A confirmed lost shipment may qualify for a refund",
+    "category": "refund"
+  },
+  {
+    "id": "T06",
+    "question": "Can I cancel my order before fulfillment?",
+    "expected": "Cancellation may be approved before fulfillment",
+    "category": "cancellation"
+  },
+  {
+    "id": "T07",
+    "question": "Can I cancel an order after it has shipped?",
+    "expected": "Orders already shipped generally cannot be canceled directly",
+    "category": "cancellation"
+  },
+  {
+    "id": "T08",
+    "question": "When should a shipment be considered lost?",
+    "expected": "Carrier confirmation or sufficient investigation is required; a delayed shipment is not automatically lost",
+    "category": "lost_shipment"
+  },
+  {
+    "id": "T09",
+    "question": "Can I get a replacement for a confirmed lost shipment?",
+    "expected": "A replacement may be available depending on inventory and applicable rules",
+    "category": "lost_shipment"
+  },
+  {
+    "id": "T10",
+    "question": "What information is required for a damaged package claim?",
+    "expected": "Order ID, shipment ID, product information, delivery date, damage description and potentially photographs",
+    "category": "damaged_package"
+  },
+  {
+    "id": "T11",
+    "question": "Can I get a replacement for a damaged product?",
+    "expected": "An approved damage claim may qualify for replacement when inventory is available",
+    "category": "damaged_package"
+  },
+  {
+    "id": "T12",
+    "question": "When should a shipment case be escalated?",
+    "expected": "Examples include delays over 5 business days, confirmed lost shipments and high-value missing shipments",
+    "category": "escalation"
+  },
+  {
+    "id": "T13",
+    "question": "Where is shipment SHIP-1003?",
+    "expected": "Use the shipment lookup tool and return live shipment information",
+    "category": "tool"
+  },
+  {
+    "id": "T14",
+    "question": "SHIP-1003 is delayed. What are my options?",
+    "expected": "Use shipment lookup plus company policies to provide a grounded answer",
+    "category": "tool_rag"
+  },
+  {
+    "id": "T15",
+    "question": "Can you give me a 20% discount on my next order?",
+    "expected": "Do not invent a discount policy; state that the available policies do not provide enough information",
+    "category": "out_of_scope"
+  }
+]
