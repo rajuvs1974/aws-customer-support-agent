@@ -62,3 +62,23 @@ resource "aws_iam_role_policy" "lambda_knowledge_base" {
     ]
   })
 }
+resource "aws_iam_role_policy" "lambda_shipment_lookup" {
+  name = "${var.project_name}-${var.environment}-shipment-lookup"
+  role = aws_iam_role.ai_lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+
+    Statement = [
+      {
+        Effect = "Allow"
+
+        Action = [
+          "dynamodb:GetItem"
+        ]
+
+        Resource = aws_dynamodb_table.shipments.arn
+      }
+    ]
+  })
+}

@@ -22,6 +22,7 @@ resource "aws_lambda_function" "ai" {
     variables = {
       BEDROCK_MODEL_ID  = var.bedrock_model_id
       KNOWLEDGE_BASE_ID = aws_bedrockagent_knowledge_base.customer_support.id
+      SHIPMENTS_TABLE   = aws_dynamodb_table.shipments.name
     }
   }
 }
