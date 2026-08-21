@@ -1,46 +1,41 @@
 ## 🏗️ Architecture
 
-Project 1 uses a **two-layer AWS architecture** designed to separate persistent knowledge/data infrastructure from deployable application infrastructure.
+The Customer Support AI Agent follows a **two-layer architecture** that separates persistent knowledge/data infrastructure from the deployable AI application.
 
-This separation allows the AI application to be destroyed and recreated without losing the RAG knowledge base, vector index, policy documents, or business data.
-
-### System Architecture
-
-![Customer Support AI Agent Architecture](architecture-diagram.png)
+![Customer Support AI Agent Architecture](architecture/architecture-diagram.png)
 
 ### Architecture Layers
 
-| Layer | Purpose | Terraform State | Lifecycle |
+| Layer | Components | Terraform State | Lifecycle |
 |---|---|---|---|
-| **Foundation / Persistent** | S3 documents, S3 Vectors, Bedrock Knowledge Base, DynamoDB and Bedrock IAM | `terraform/foundation` | Persistent |
-| **Application / Deployable** | Lambda AI Agent, API Gateway and Lambda IAM | `terraform/application` | Destroy / Recreate |
+| **Foundation – Persistent** | S3, S3 Vectors, Bedrock Knowledge Base, Data Source, DynamoDB, Bedrock IAM | `terraform/foundation` | Persistent |
+| **Application – Deployable** | API Gateway, Lambda AI Agent, Lambda IAM, API integration, routes and permissions | `terraform/application` | Destroy / Recreate |
 
-### Foundation Layer — Persistent
+### Foundation Layer
 
-The Foundation layer contains resources that should survive application deployments and application teardown:
+The Foundation layer contains resources that preserve enterprise knowledge and business data:
 
-- **Amazon S3** — stores customer-support policy documents
-- **Amazon S3 Vectors** — stores vector embeddings
-- **Amazon Bedrock Knowledge Base** — RAG retrieval layer
-- **Bedrock Data Source** — connects the Knowledge Base to S3
-- **Amazon DynamoDB**
-  - Customers
-  - Orders
-  - Shipments
-- **IAM** — permissions required by the Bedrock Knowledge Base
+- Amazon S3 — customer-support policy documents
+- Amazon S3 Vectors — vector index
+- Amazon Bedrock Knowledge Base — RAG retrieval
+- Bedrock S3 data source
+- DynamoDB Customers
+- DynamoDB Orders
+- DynamoDB Shipments
+- IAM roles and policies required by Bedrock
 
-The Foundation state is intentionally isolated from the application state.
+The Foundation state is intentionally isolated so these resources can survive application deployments and teardown.
 
-### Application Layer — Deployable
+### Application Layer
 
-The Application layer contains resources that can safely be destroyed and recreated:
+The Application layer contains the deployable AI workload:
 
-- **Amazon API Gateway HTTP API**
-- **AWS Lambda AI Agent**
-- **Lambda execution IAM role**
-- **Bedrock model invocation permissions**
-- **Knowledge Base retrieval permissions**
-- **DynamoDB shipment lookup permissions**
+- Amazon API Gateway HTTP API
+- AWS Lambda AI Agent
+- Lambda execution role
+- Bedrock model invocation permissions
+- Knowledge Base retrieval permissions
+- DynamoDB shipment lookup permissions
 - API Gateway → Lambda integration
 - `POST /chat` route
 - Lambda invocation permission
@@ -56,20 +51,20 @@ API Gateway
    ▼
 Lambda AI Agent
    │
-   ├─────────────── Policy / General Question ───────────────┐
-   │                                                         ▼
-   │                                             Amazon Bedrock
-   │                                                         │
-   │                                                         ▼
-   │                                             Knowledge Base
-   │                                                 /         \
-   │                                                /           \
-   │                                               ▼             ▼
-   │                                             S3          S3 Vectors
-   │                                          Documents      Vector Index
+   ├── Policy / General Question
+   │        │
+   │        ▼
+   │   Bedrock Knowledge Base
+   │        │
+   │        ├── S3 Policy Documents
+   │        │
+   │        └── S3 Vectors
    │
-   └────────────── Shipment Question ────────────────────────►
-                                                               │
-                                                               ▼
-                                                           DynamoDB
-                                                           Shipments
+   └── Shipment Question
+            │
+            ▼
+      get_shipment Tool
+            │
+            ▼
+        DynamoDB
+        Shipments
