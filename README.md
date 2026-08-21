@@ -68,3 +68,26 @@ Lambda AI Agent
             ▼
         DynamoDB
         Shipments
+
+## 🧪 Evaluation
+
+The Customer Support AI Agent includes a 15-test evaluation dataset covering RAG grounding, shipment tool calling, policy-based responses, and out-of-scope handling.
+
+### Final Evaluation Result
+
+| Metric | Result |
+|---|---:|
+| Total Tests | **15** |
+| Passed | **15** |
+| Failed | **0** |
+| Pass Rate | **100%** |
+
+```text
+======================================================================
+EVALUATION SUMMARY
+======================================================================
+Total Tests : 15
+Passed      : 15
+Failed      : 0
+Pass Rate   : 100.0%
+======================================================================
